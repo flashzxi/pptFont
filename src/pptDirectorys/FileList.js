@@ -1,6 +1,6 @@
 import React from 'react';
 import { List} from "antd";
-import {jumpToPPT, getFiles} from "../requests/pptRequests";
+import {getFiles} from "../requests/pptRequests";
 
 class FileList extends React.Component{
     constructor(props) {
@@ -36,6 +36,7 @@ class FileList extends React.Component{
         }
         getFiles(realUrl).then(
             respond => {
+                console.log(respond.data)
                 if(url === ".."){
                     this.currentPath = this.currentPath.slice(0,-1)
                 }else{
