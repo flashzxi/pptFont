@@ -36,27 +36,31 @@ class FileList extends React.Component{
         }
         getFiles(realUrl).then(
             respond => {
-                console.log(respond.data)
-                if(url === ".."){
-                    this.currentPath = this.currentPath.slice(0,-1)
+                // console.log(respond.data)
+                if(respond.data.success === false){
+                    alert(respond.data.error)
                 }else{
-                    this.currentPath = [...this.currentPath, url]
-                }
-                const data = respond.data
-                let ppts = []
-                let dirs = []
-                for (let i = 0; i < data.length; i++) {
-                    const file = data[i]
-                    if(file.value === 'dir'){
-                        dirs = [...dirs, file.key]
+                    if(url === ".."){
+                        this.currentPath = this.currentPath.slice(0,-1)
                     }else{
-                        ppts = [...ppts, file.key]
+                        this.currentPath = [...this.currentPath, url]
                     }
+                    const data = respond.data.data
+                    let ppts = []
+                    let dirs = []
+                    for (let i = 0; i < data.length; i++) {
+                        const file = data[i]
+                        if(file.value === 'dir'){
+                            dirs = [...dirs, file.key]
+                        }else{
+                            ppts = [...ppts, file.key]
+                        }
+                    }
+                    this.setState({
+                        ppts: ppts,
+                        dirs: dirs
+                    })
                 }
-                this.setState({
-                    ppts: ppts,
-                    dirs: dirs
-                })
             }
         )
     }
