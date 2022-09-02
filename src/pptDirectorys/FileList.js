@@ -72,7 +72,7 @@ class FileList extends React.Component{
         }else{
             realUrl = url
         }
-        window.location.href="http://ppt.flashzxi.cn/"+realUrl
+        window.location.href="http://ppt.flashzxi.cn/ppts/"+realUrl
     }
 
     render() {
